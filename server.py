@@ -1,33 +1,3 @@
-# from flask import Flask
-# from flask import g
-# from fastai.vision import *
-# from fastai.widgets import *
-# import numpy as np
-# from pathlib import Path
-# app = Flask(__name__)
-
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World!'
-#
-# # @app.before_first_request
-# # def load_model():
-# #     np.random.seed(42)
-# #
-# #
-# #     return
-#
-# @app.route('/sample_image')
-# def sample_image() -> str:
-#     if 'path' not in g:
-#         g.path = Path('./data')
-#     if'learn' not in g:
-#         g.learn = load_learner(g.path)
-#     img = open_image(g.path/'car'/'00000001.png')
-#     pred_class,pred_idx,outputs = g.learn.predict(img)
-#     return pred_class
-
-
 import os
 import base64
 from io import BytesIO
