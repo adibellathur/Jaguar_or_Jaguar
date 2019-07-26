@@ -25,12 +25,10 @@ trained_model = load_model()
 
 @app.route('/', methods=['GET'])
 def index():
-    """Render the app"""
     return render_template('serving_template.html')
 
 @app.route('/image', methods=['POST'])
 def eval_image():
-    """Evaluate the image!"""
     input_file = request.files.get('file')
     if not input_file:
         return BadRequest("File is not present in the request")
@@ -38,10 +36,9 @@ def eval_image():
         return BadRequest("Filename is not present in the request")
     if not input_file.filename.lower().endswith(('.jpg', '.jpeg', '.png')):
         return BadRequest("Invalid file type")
-
     input_buffer = BytesIO()
     input_file.save(input_buffer)
-
+    print(input_buffer)
     pred = evaluate_image(open_image(input_buffer))
     return jsonify({
         'prediction': pred,
@@ -49,18 +46,7 @@ def eval_image():
 
 @app.route('/sample_image')
 def eval_sample_image():
-    # input_file = request.files.get('file')
-    # if not input_file:
-    #     return BadRequest("File is not present in the request")
-    # if input_file.filename == '':
-    #     return BadRequest("Filename is not present in the request")
-    # if not input_file.filename.lower().endswith(('.jpg', '.jpeg', '.png')):
-    #     return BadRequest("Invalid file type")
-    #
-    # input_buffer = BytesIO()
-    # input_file.save(input_buffer)
-
-    pred = evaluate_image(open_image('./data/jaguar/00000000.jpg'))
+    pred = evaluate_image(open_image('./image.jpeg'))
     return jsonify({
         'prediction': pred
     })
